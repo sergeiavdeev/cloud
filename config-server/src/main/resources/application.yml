@@ -5,14 +5,14 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/sergeiavdeev/cloud
+          uri: https://github.com/sergeiavdeev/market-a
           default-label: master
+          #skip-ssl-validation: true
+          #username:
+          #password:
           search-paths:
             - /config-server/config
           clone-on-start: true
-        #native:
-        #  search-locations:
-        #    - classpath:/config
   application:
     name: config-server
   eureka:
