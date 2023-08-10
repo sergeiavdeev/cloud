@@ -5,7 +5,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/sergeiavdeev/market-a
+          uri: https://github.com/sergeiavdeev/cloud
           default-label: master
           #skip-ssl-validation: true
           #username:
