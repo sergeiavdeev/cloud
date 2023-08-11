@@ -15,3 +15,9 @@ spring:
           clone-on-start: true
   application:
     name: config-server
+eureka:
+  client:
+    eureka-server-u-r-l-context: http://eureka
+    eureka-server-port: 8761
+  instance:
+    instance-id: ${spring.application.name}:${random.value}
