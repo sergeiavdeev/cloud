@@ -25,7 +25,7 @@ pipeline {
         stage("Build & run containers") {
             steps {
                 dir('eureka') {
-                    sh 'docker build --tag eureka:1-snapshot .'
+                    sh "docker build --tag eureka:${BUILD_NUMBER}-snapshot ."
                 }
                 sh "docker run -d --rm -p 8761:8761 --name eureka --network cloud eureka:${BUILD_NUMBER}-snapshot"
                 dir('config-server') {
