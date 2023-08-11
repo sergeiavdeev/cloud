@@ -17,7 +17,7 @@ spring:
     name: config-server
 eureka:
   client:
-    eureka-server-u-r-l-context: http://eureka
-    eureka-server-port: 8761
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka/
   instance:
     instance-id: ${spring.application.name}:${random.value}
