@@ -36,12 +36,12 @@ pipeline {
                 dir('config-server') {
                     sh 'docker build --tag config-server:1-snapshot .'
                 }
-                sh 'docker run -d --rm -p 8761:8761 --name config-server --network cloud config-server:1-snapshot'
+                sh 'docker run -d --rm -p 8888:8888 --name config-server --network cloud config-server:1-snapshot'
                 sh 'sleep 5'
                 dir('gateway') {
                     sh 'docker build --tag gateway:1-snapshot .'
                 }
-                sh 'docker run -d --rm -p 8761:8761 --name gateway --network cloud gateway:1-snapshot'
+                sh 'docker run -d --rm -p 8082:8082 --name gateway --network cloud gateway:1-snapshot'
             }
         }
     }
