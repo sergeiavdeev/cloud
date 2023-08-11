@@ -39,10 +39,5 @@ pipeline {
                 sh "docker run -d --rm -p 8082:8082 --name gateway --network cloud gateway:${BUILD_NUMBER}-tst"
             }
         }
-        stage("Clean docker images") {
-            steps {
-                //sh 'docker rmi $(docker images -f dangling=true -q)'
-            }
-        }
     }
 }
