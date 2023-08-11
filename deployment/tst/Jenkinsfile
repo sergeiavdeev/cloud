@@ -15,5 +15,25 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
+        stage("Remover containers") {
+            steps {
+                sh 'docker container stop config-server'
+                echo "Done"
+                sh 'docker container stop gateway'
+                echo "Done"
+                sh 'docker container stop eureka'
+                echo "Done"
+            }
+        }
+        stage("Remove images") {
+            steps {
+                sh 'docker image rm eureka:1-snapshot'
+                echo "Done"
+                sh 'docker image rm gateway:1-snapshot'
+                echo "Done"
+                sh 'docker image rm config-server:1-snapshot'
+                echo "Done"
+            }
+        }
     }
 }
