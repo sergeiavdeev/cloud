@@ -33,15 +33,21 @@ pipeline {
                     sh 'docker build --tag eureka:1-snapshot .'
                 }
                 sh 'docker run -d --rm -p 8761:8761 --name eureka --network cloud eureka:1-snapshot'
+                sh 'sleep 10'
                 dir('config-server') {
                     sh 'docker build --tag config-server:1-snapshot .'
                 }
                 sh 'docker run -d --rm -p 8888:8888 --name config-server --network cloud config-server:1-snapshot'
-                sh 'sleep 5'
+                sh 'sleep 10'
                 dir('gateway') {
                     sh 'docker build --tag gateway:1-snapshot .'
                 }
                 sh 'docker run -d --rm -p 8082:8082 --name gateway --network cloud gateway:1-snapshot'
+            }
+        }
+        stage("Clean docker images") {
+            steps {
+                sh 'docker rmi $(docker images -f dangling=true -q)'
             }
         }
     }
