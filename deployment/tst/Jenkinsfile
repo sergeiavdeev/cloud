@@ -1,0 +1,21 @@
+#!groovy
+
+properties[disableConcurrentBuilds()]
+
+pipeline {
+    agent {
+        label: 'master'
+    }
+    options {
+        buildDiscarder(logRotator(numToKeeper: '5', artifactNumToKeeperStr: '5'))
+        timestamps()
+    }
+    stages {
+        stage('Build artifacts') {
+            steps {
+                echo "=========start build arctifacts========="
+                sh 'mvn clean package'
+            }
+        }
+    }
+}
