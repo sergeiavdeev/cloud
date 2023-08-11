@@ -33,6 +33,15 @@ pipeline {
                     sh 'docker build --tag eureka:1-snapshot .'
                 }
                 sh 'docker run -d --rm -p 8761:8761 --name eureka --network cloud eureka:1-snapshot'
+                dir('config-server') {
+                    sh 'docker build --tag config-server:1-snapshot .'
+                }
+                sh 'docker run -d --rm -p 8761:8761 --name config-server --network cloud config-server:1-snapshot'
+                sh 'sleep 5'
+                dir('gateway') {
+                    sh 'docker build --tag gateway:1-snapshot .'
+                }
+                sh 'docker run -d --rm -p 8761:8761 --name gateway --network cloud gateway:1-snapshot'
             }
         }
     }
