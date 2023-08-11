@@ -25,18 +25,18 @@ pipeline {
         stage("Build & run containers") {
             steps {
                 dir('eureka') {
-                    sh "docker build --tag eureka:${BUILD_NUMBER}-snapshot ."
+                    sh "docker build --tag eureka:${BUILD_NUMBER}-tst ."
                 }
-                sh "docker run -d --rm -p 8761:8761 --name eureka --network cloud eureka:${BUILD_NUMBER}-snapshot"
+                sh "docker run -d --rm -p 8761:8761 --name eureka --network cloud eureka:${BUILD_NUMBER}-tst"
                 dir('config-server') {
-                    sh 'docker build --tag config-server:1-snapshot .'
+                    sh "docker build --tag config-server:${BUILD_NUMBER}-tst ."
                 }
-                sh 'docker run -d --rm -p 8888:8888 --name config-server --network cloud config-server:1-snapshot'
+                sh "docker run -d --rm -p 8888:8888 --name config-server --network cloud config-server:${BUILD_NUMBER}-tst"
                 sh 'sleep 10'
                 dir('gateway') {
-                    sh 'docker build --tag gateway:1-snapshot .'
+                    sh "docker build --tag gateway:${BUILD_NUMBER}-tst ."
                 }
-                sh 'docker run -d --rm -p 8082:8082 --name gateway --network cloud gateway:1-snapshot'
+                sh "docker run -d --rm -p 8082:8082 --name gateway --network cloud gateway:${BUILD_NUMBER}-tst"
             }
         }
         stage("Clean docker images") {
