@@ -12,6 +12,7 @@ pipeline {
         stage("Build artifacts") {
             steps {
                 echo "=========start build arctifacts========="
+                sh 'mvn clean package'
             }
         }
     }
