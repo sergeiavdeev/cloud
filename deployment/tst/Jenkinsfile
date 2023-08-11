@@ -17,21 +17,13 @@ pipeline {
         }
         stage("Remover containers") {
             steps {
-                sh 'docker container stop config-server'
-                echo "Done"
-                sh 'docker container stop gateway'
-                echo "Done"
-                sh 'docker container stop eureka'
-                echo "Done"
+                sh 'docker ps -aq --filter "name=config-server" | xargs -r docker rm -f'
+                sh 'docker ps -aq --filter "name=gateway" | xargs -r docker rm -f'
+                sh 'docker ps -aq --filter "name=eureka" | xargs -r docker rm -f'
             }
         }
         stage("Remove images") {
             steps {
-                sh 'docker image rm eureka:1-snapshot'
-                echo "Done"
-                sh 'docker image rm gateway:1-snapshot'
-                echo "Done"
-                sh 'docker image rm config-server:1-snapshot'
                 echo "Done"
             }
         }
