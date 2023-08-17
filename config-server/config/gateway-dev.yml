@@ -1,6 +1,11 @@
 server:
   port: 8083
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://avdeev-sa.ru/keycloak/realms/booking_realm
   cloud:
     gateway:
       discovery:
