@@ -1,2 +1,11 @@
 server:
   port: 0
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/booking
+    name: postgresql
+    username: resource
+    password: 61Ifhjukjn
+    schema: "resource"
+    repositories:
+      enabled: true
