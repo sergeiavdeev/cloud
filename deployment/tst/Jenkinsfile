@@ -5,7 +5,7 @@ properties([disableConcurrentBuilds()])
 pipeline {
     agent any
     options {
-        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        buildDiscarder(logRotator(numToKeepStr: '3', artifactNumToKeepStr: '3'))
         timestamps()
     }
     stages {
@@ -27,16 +27,16 @@ pipeline {
                 dir('eureka') {
                     sh "docker build --tag eureka:${BUILD_NUMBER}-tst ."
                 }
-                sh "docker run -d --rm -p 8761:8761 --name eureka --network cloud eureka:${BUILD_NUMBER}-tst"
+                sh "docker run -d --rm -p 8761:8761 --name eureka --network cloud -e spring.profiles.active=tst eureka:${BUILD_NUMBER}-tst"
                 dir('config-server') {
                     sh "docker build --tag config-server:${BUILD_NUMBER}-tst ."
                 }
-                sh "docker run -d --rm -p 8888:8888 --name config-server --network cloud config-server:${BUILD_NUMBER}-tst"
+                sh "docker run -d --rm -p 8888:8888 --name config-server --network cloud -e spring.profiles.active=tst config-server:${BUILD_NUMBER}-tst"
                 sh 'sleep 10'
                 dir('gateway') {
                     sh "docker build --tag gateway:${BUILD_NUMBER}-tst ."
                 }
-                sh "docker run -d --rm -p 8082:8082 --name gateway --network cloud gateway:${BUILD_NUMBER}-tst"
+                sh "docker run -d --rm -p 8082:8082 --name gateway --network cloud -e spring.profiles.active=tst gateway:${BUILD_NUMBER}-tst"
             }
         }
         stage("Clean docker images") {
