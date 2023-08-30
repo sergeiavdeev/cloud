@@ -6,3 +6,6 @@ spring:
   cloud:
     config:
       fail-fast: true
+logging:
+  level:
+    org.springframework.security: TRACE
