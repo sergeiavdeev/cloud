@@ -8,4 +8,6 @@ spring:
       fail-fast: true
 logging:
   level:
-    org.springframework.security: TRACE
+    com.netflix: DEBUG
+    org.springframework.web: DEBUG
+    com.optimagrowth: DEBUG
