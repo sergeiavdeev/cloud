@@ -5,7 +5,7 @@ spring:
     url: r2dbc:postgresql://localhost:5432/booking
     name: postgresql
     username: resource
-    password:  {cipher}eb56138ad5beb09bef691268bd396082251b65a51e1bc81b90d2da3532fd7aea
+    password:  {cipher} eb56138ad5beb09bef691268bd396082251b65a51e1bc81b90d2da3532fd7aea
     schema: "resource"
     repositories:
       enabled: true
@@ -14,4 +14,4 @@ spring:
     locations: classpath:db/migration
     url: jdbc:postgresql://localhost:5432/booking
     user: resource
-    password: {cipher}eb56138ad5beb09bef691268bd396082251b65a51e1bc81b90d2da3532fd7aea
+    password: {cipher} eb56138ad5beb09bef691268bd396082251b65a51e1bc81b90d2da3532fd7aea
