@@ -18,8 +18,7 @@ spring:
         - id: resource-service
           uri: lb://resource-service
           predicates:
-            - Path=/api/v1/storage/**
-            - Path=/api/v1/contact-type/**
+            - Path=/api/v1/storage/**, /api/v1/contact-type/**
           filters:
             - StripPrefix=1
             - PrefixPath=/
