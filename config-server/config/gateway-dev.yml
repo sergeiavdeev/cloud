@@ -16,7 +16,7 @@ spring:
             - StripPrefix=1
             - PrefixPath=/
         - id: schedule-service
-          uri: lb://resource-service
+          uri: lb://schedule-service
           predicates:
             - Path=/api/v1/calendar/**
           filters:
