@@ -15,3 +15,8 @@ spring:
     url: jdbc:postgresql://localhost:5432/booking
     user: schedule
     password: '{cipher}5f697e69b202139460ef1ed466ad1e8112845baeda1c278883b8a131752da8f8'
+logging:
+  level:
+    io.r2dbc.postgresql.QUERY: DEBUG
+    io.r2dbc.postgresql.PARAM: DEBUG
+    org.springframework.web.reactive: DEBUG
