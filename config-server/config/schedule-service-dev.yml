@@ -1,0 +1,15 @@
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/booking
+    name: postgresql
+    username: schedule
+    password: '{cipher}5f697e69b202139460ef1ed466ad1e8112845baeda1c278883b8a131752da8f8'
+    schema: "schedule"
+    repositories:
+      enabled: true
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    url: jdbc:postgresql://localhost:5432/booking
+    user: schedule
+    password: '{cipher}5f697e69b202139460ef1ed466ad1e8112845baeda1c278883b8a131752da8f8'
