@@ -8,17 +8,17 @@ spring:
           enabled: false
           lower-case-service-id: true
       routes:
-        - id: config-server
-          uri: lb://config-server
-          predicates:
-            - Path=/config/**
-          filters:
-            - StripPrefix=1
-            - PrefixPath=/
         - id: resource-service
           uri: lb://resource-service
           predicates:
             - Path=/api/v1/storage/**, /api/v1/contact-type/**
+          filters:
+            - StripPrefix=1
+            - PrefixPath=/
+        - id: schedule-service
+          uri: lb://resource-service
+          predicates:
+            - Path=/api/v1/calendar/**
           filters:
             - StripPrefix=1
             - PrefixPath=/
