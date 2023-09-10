@@ -11,17 +11,10 @@ spring:
       enabled: true
   security:
     oauth2:
-      client:
-        registration:
-          keycloak:
-            client-id: booking
-            authorization-grant-type: authorization_code
-            scope: openid
-            issuer-uri: https://avdeev-sa.ru/keycloak/realms/booking_realm
-            user-name-attribute: preferred_username
       resourceserver:
         jwt:
           issuer-uri: https://avdeev-sa.ru/keycloak/realms/booking_realm
+          jwk-set-uri: https://avdeev-sa.ru/keycloak/realms/booking_realm/protocol/openid-connect/certs
   flyway:
     enabled: true
     locations: classpath:db/migration
