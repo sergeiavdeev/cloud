@@ -9,6 +9,12 @@ spring:
     schema: "resource"
     repositories:
       enabled: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://avdeev-sa.ru/keycloak/realms/booking_realm
+          jwk-set-uri: https://avdeev-sa.ru/keycloak/realms/booking_realm/protocol/openid-connect/certs
   flyway:
     enabled: true
     locations: classpath:db/migration
