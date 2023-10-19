@@ -21,3 +21,4 @@ spring:
             - Path=/api/v1/calendar?, /api/v1/calendar/**, /api/v1/deviation/**
           filters:
             - StripPrefix=1
+            - PrefixPath=/
