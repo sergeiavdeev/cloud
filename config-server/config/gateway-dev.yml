@@ -19,6 +19,7 @@ spring:
           uri: lb://schedule-service
           predicates:
             - Path=/api/v1/calendar, /api/v1/calendar/**, /api/v1/deviation/**
+            - Query=owner
           filters:
             - StripPrefix=1
             - PrefixPath=/
