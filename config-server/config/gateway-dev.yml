@@ -22,10 +22,3 @@ spring:
           filters:
             - StripPrefix=1
             - PrefixPath=/
-        - id: front
-          uri: http://localhost:4200
-          predicates:
-            - Path=/**
-          filters:
-            - StripPrefix=1
-            - PrefixPath=/
