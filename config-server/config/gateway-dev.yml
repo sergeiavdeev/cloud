@@ -26,5 +26,5 @@ spring:
           uri: http://localhost:4200
           predicates:
             - Path=/**
-            - StripPrefix=1
+            - StripPrefix=0
             - PrefixPath=/
