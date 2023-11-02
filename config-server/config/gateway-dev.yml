@@ -37,3 +37,4 @@ spring:
           filters:
             - StripPrefix=1
             - PrefixPath=/
+            - TokenRelay=
