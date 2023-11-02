@@ -9,7 +9,7 @@ spring:
             issuer-uri: https://avdeev-sa.ru/keycloak/realms/booking_realm
             user-name-attribute: preferred_username
         registration:
-          api-client:
+          gateway:
             provider: keycloak
             client-id: booking
             authorized-grant-types: authorization_code
