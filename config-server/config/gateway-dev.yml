@@ -7,6 +7,7 @@ spring:
         provider:
           keycloak:
             issuer-uri: https://avdeev-sa.ru/keycloak/realms/booking_realm
+            user-name-attribute: preferred_username
         registration:
           quotes-client:
             provider: keycloak
