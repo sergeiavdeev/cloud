@@ -1,6 +1,21 @@
 server:
   port: 8083
 spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: https://avdeev-sa.ru/keycloak/realms/booking_realm
+        registration:
+          quotes-client:
+            provider: keycloak
+            client-id: booking
+            client-secret: '{cipher}878712b1da2988529855ad3d93671d350de72f4cff05a8a160ea684ac7f8f2b5ebe569546e613f742be00980a63c66cb5aea8ceffd6e869724c5a328de3a0d2f'
+            scope:
+              - email
+              - profile
+              - roles
   cloud:
     gateway:
       discovery:
