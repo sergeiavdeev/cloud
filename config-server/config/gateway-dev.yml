@@ -20,6 +20,9 @@ spring:
             scope: openid
   cloud:
     gateway:
+      default-filters:
+        - TokenRelay=
+        - RemoveRequestHeader=Cookie
       discovery:
         locator:
           enabled: false
@@ -39,7 +42,6 @@ spring:
           filters:
             - StripPrefix=1
             - PrefixPath=/
-            - TokenRelay=
 
 logging:
   level:
