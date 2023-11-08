@@ -3,6 +3,10 @@ server:
 spring:
   security:
     oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: https://avdeev-sa.ru/keycloak/realms/booking_realm
+          jwk-set-uri: https://avdeev-sa.ru/keycloak/realms/booking_realm/protocol/openid-connect/certs
       client:
         provider:
           keycloak:
