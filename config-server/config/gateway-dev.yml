@@ -36,3 +36,8 @@ spring:
             - StripPrefix=1
             - PrefixPath=/
             - TokenRelay=
+
+logging:
+  level:
+    org.springframework.web.reactive: DEBUG
+    org.springframework.security: DEBUG
