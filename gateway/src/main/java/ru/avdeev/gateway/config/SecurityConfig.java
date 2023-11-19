@@ -14,11 +14,14 @@ import org.springframework.security.core.context.ReactiveSecurityContextHolder;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
+import org.springframework.security.oauth2.client.oidc.web.server.logout.OidcClientInitiatedServerLogoutSuccessHandler;
+import org.springframework.security.oauth2.client.registration.ReactiveClientRegistrationRepository;
 import org.springframework.security.oauth2.client.userinfo.ReactiveOAuth2UserService;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.security.web.server.authentication.logout.ServerLogoutSuccessHandler;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
@@ -31,7 +34,7 @@ import java.util.stream.Collectors;
 public class SecurityConfig {
 
     @Bean
-    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
+    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http, ServerLogoutSuccessHandler handler) {
         http.authorizeExchange((authorize) -> authorize
                         .pathMatchers(HttpMethod.POST, "/**").authenticated()
                         .anyExchange().permitAll()
@@ -44,7 +47,7 @@ public class SecurityConfig {
                 )
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .oauth2Login(Customizer.withDefaults())
-                .logout(Customizer.withDefaults())
+                .logout(logoutSpec -> logoutSpec.logoutSuccessHandler(handler))
                 .oauth2Client(Customizer.withDefaults())
             ;
 
@@ -105,5 +108,14 @@ public class SecurityConfig {
                                     })
                             .switchIfEmpty(chain.filter(exchange));
         }
+    }
+
+    @Bean
+    ServerLogoutSuccessHandler keycloakLogoutSuccessHandler(ReactiveClientRegistrationRepository repository) {
+        OidcClientInitiatedServerLogoutSuccessHandler handler =
+                new OidcClientInitiatedServerLogoutSuccessHandler(repository);
+
+        handler.setPostLogoutRedirectUri("{baseUrl}");
+        return handler;
     }
 }
