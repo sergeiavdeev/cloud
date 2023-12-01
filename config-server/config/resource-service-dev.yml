@@ -50,9 +50,7 @@ resilience4j.circuitbreaker:
       waitDurationInOpenState: 5s
       failureRateThreshold: 50
       eventConsumerBufferSize: 10
-      recordExceptions:
-        - org.springframework.dao.DataAccessResourceFailureException
-        - io.r2dbc.spi.R2dbcNonTransientResourceException
+
 logging:
   level:
     io.r2dbc.postgresql.QUERY: DEBUG
