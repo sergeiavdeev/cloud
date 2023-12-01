@@ -30,8 +30,6 @@ management:
   endpoint:
     info:
       enabled: true
-      build:
-        enabled: true
     health:
       enabled: true
 
