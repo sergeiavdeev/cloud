@@ -36,6 +36,9 @@ management:
   info:
     java:
       enabled: true
+  health:
+    circuitbreakers:
+      enabled: true
 resilience4j.circuitbreaker:
   configs:
     default:
