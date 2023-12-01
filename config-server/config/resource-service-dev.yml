@@ -32,6 +32,7 @@ management:
       enabled: true
     health:
       enabled: true
+      show-details: "always"
   info:
     java:
       enabled: true
