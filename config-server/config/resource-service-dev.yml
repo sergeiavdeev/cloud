@@ -21,6 +21,13 @@ spring:
     url: jdbc:postgresql://localhost:5432/booking
     user: resource
     password: '{cipher}eb56138ad5beb09bef691268bd396082251b65a51e1bc81b90d2da3532fd7aea'
+management:
+  endpoints:
+    enabled-by-default: false
+  endpoint:
+    info:
+      enabled: true
+
 logging:
   level:
     io.r2dbc.postgresql.QUERY: DEBUG
