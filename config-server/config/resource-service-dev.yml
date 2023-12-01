@@ -24,6 +24,8 @@ spring:
 management:
   endpoints:
     enabled-by-default: false
+    web:
+      exposure: "health,info"
   endpoint:
     info:
       enabled: true
