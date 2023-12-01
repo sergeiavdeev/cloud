@@ -32,7 +32,9 @@ management:
       enabled: true
     health:
       enabled: true
-
+  info:
+    java:
+      enabled: true
 logging:
   level:
     io.r2dbc.postgresql.QUERY: DEBUG
