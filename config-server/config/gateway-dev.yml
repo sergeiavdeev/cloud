@@ -49,7 +49,7 @@ spring:
             allowedMethods:
               - GET
               - POST
-              - OPTIONS
+        add-to-simple-url-handler-mapping: true
 logging:
   level:
     org.springframework.web.reactive: DEBUG
