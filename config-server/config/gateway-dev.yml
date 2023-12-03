@@ -42,7 +42,14 @@ spring:
           filters:
             - StripPrefix=1
             - PrefixPath=/
-
+      global-cors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - OPTIONS
 logging:
   level:
     org.springframework.web.reactive: DEBUG
