@@ -1,0 +1,32 @@
+version: "3"
+services:
+  config-server:
+    build: config-server/
+    command: java -jar config-server-1.0-SNAPSHOT.jar
+    ports:
+      - 8888:8888
+    environment:
+      spring.profiles.active: "dev"
+      encrypt.key=9edc7779-04e8-4275-ae43-ebedb8555b99:
+
+  eureka:
+    build: eureka/
+    command: java -jar eureka-1.0-SNAPSHOT.jar
+    ports:
+      - 8761:8761
+    environment:
+      spring.profiles.active: "dev"
+    depends_on:
+     - config-server
+
+  gateway:
+    build: gateway/
+    command: java -jar gateway-1.0-SNAPSHOT.jar
+    ports:
+      - 8083:8083
+    environment:
+      spring.profiles.active: "dev"
+    depends_on:
+      - config-server
+      - eureka
+    restart: "always"
