@@ -24,8 +24,8 @@ pipeline {
         }
         stage("Build & run containers") {
             steps {
-                sh "TAG=${BUILD_NUMBER} docker compose build"
-                sh "TAG=${BUILD_NUMBER} docker compose up -d"
+                sh "TAG=${BUILD_NUMBER}-tst docker compose build"
+                sh "TAG=${BUILD_NUMBER}-tst docker compose up -d"
                 /*dir('eureka') {
                     sh "docker build --tag eureka:${BUILD_NUMBER}-tst ."
                 }
