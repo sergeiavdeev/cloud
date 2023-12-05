@@ -1,16 +1,23 @@
-version: "3"
+version: "3.9"
 services:
   config-server:
     build: config-server/
+    image: config-server:${TAG}
     command: java -jar config-server-1.0-SNAPSHOT.jar
     ports:
       - 8888:8888
     environment:
       spring.profiles.active: "dev"
       encrypt.key=9edc7779-04e8-4275-ae43-ebedb8555b99:
-
+    healthcheck:
+      test: curl --fail http://config-server:8888/gateway/defult || exit 1
+      #interval: 2s
+      #retries: 5
+      #start_period: 1s
+      #timeout: 5s
   eureka:
     build: eureka/
+    image: eureka:${TAG}
     command: java -jar eureka-1.0-SNAPSHOT.jar
     ports:
       - 8761:8761
@@ -21,12 +28,14 @@ services:
 
   gateway:
     build: gateway/
+    image: gateway:${TAG}
     command: java -jar gateway-1.0-SNAPSHOT.jar
     ports:
       - 8083:8083
     environment:
       spring.profiles.active: "dev"
     depends_on:
-      - config-server
-      - eureka
-    restart: "always"
+      config-server:
+        condition: service_healthy
+      eureka:
+        condition: service_started

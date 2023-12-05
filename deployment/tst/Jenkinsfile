@@ -24,7 +24,9 @@ pipeline {
         }
         stage("Build & run containers") {
             steps {
-                dir('eureka') {
+                sh "TAG=${BUILD_NUMBER} docker compose build"
+                sh "TAG=${BUILD_NUMBER} docker compose up -d"
+                /*dir('eureka') {
                     sh "docker build --tag eureka:${BUILD_NUMBER}-tst ."
                 }
                 sh "docker run -d --rm -p 8761:8761 --name eureka --network cloud -e spring.profiles.active=tst eureka:${BUILD_NUMBER}-tst"
@@ -37,7 +39,9 @@ pipeline {
                     sh "docker build --tag gateway:${BUILD_NUMBER}-tst ."
                 }
                 sh "docker run -d --rm -p 8082:8082 --name gateway --network cloud -e spring.profiles.active=tst gateway:${BUILD_NUMBER}-tst"
+                */
             }
+
         }
         stage("Clean docker images") {
             steps {
