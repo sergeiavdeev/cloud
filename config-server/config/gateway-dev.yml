@@ -31,7 +31,7 @@ spring:
         - id: default
           uri: forward:/index.html
           predicates:
-              - Path=/ttc-tops
+              - Path=/ttc-tops**
         - id: resource-service
           uri: lb://resource-service
           predicates:
