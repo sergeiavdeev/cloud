@@ -1,7 +1,6 @@
 server:
   port: 8083
-  servlet:
-    context-path: /cnt-tops
+server.servlet.context-path: /cnt-tops
 spring:
   security:
     oauth2:
