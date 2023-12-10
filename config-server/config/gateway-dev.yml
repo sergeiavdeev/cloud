@@ -28,10 +28,7 @@ spring:
           enabled: false
           lower-case-service-id: true
       routes:
-        - id: default
-          uri: forward:/static/ttc-tops/index.html
-          predicates:
-              - Path=/ttc-tops/**
+
         - id: resource-service
           uri: lb://resource-service
           predicates:
