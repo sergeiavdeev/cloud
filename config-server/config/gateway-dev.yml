@@ -29,7 +29,7 @@ spring:
           lower-case-service-id: true
       routes:
         - id: default
-          uri: forward:/index.html
+          uri: forward:ttc-tops/index.html
           predicates:
               - Path=/ttc-tops/**
         - id: resource-service
