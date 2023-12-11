@@ -12,13 +12,13 @@ spring:
           keycloak:
             issuer-uri: https://avdeev-sa.ru/keycloak/realms/booking_realm
             user-name-attribute: preferred_username
+            authorization-uri: /ttc-tops/oauth2/authorization/keycloak
         registration:
           keycloak:
             provider: keycloak
             client-id: booking
             client-secret: '{cipher}878712b1da2988529855ad3d93671d350de72f4cff05a8a160ea684ac7f8f2b5ebe569546e613f742be00980a63c66cb5aea8ceffd6e869724c5a328de3a0d2f'
             scope: openid
-            authorization-uri: /ttc-tops/oauth2/authorization/keycloak
   cloud:
     gateway:
       default-filters:
