@@ -1,6 +1,8 @@
 server:
   port: 8083
 spring:
+  webflux:
+    base-path: "/ttc-tops"
   security:
     oauth2:
       resource-server:
