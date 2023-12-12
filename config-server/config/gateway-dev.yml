@@ -45,7 +45,7 @@ spring:
         - id: oauth2
           uri: /oauth2/authorization/keycloak
           predicates:
-            -Path=/ttc-tops/oauth2/authorization/keycloak
+            - Path=/ttc-tops/oauth2/authorization/keycloak
       globalcors:
         cors-configurations:
           '[/**]':
