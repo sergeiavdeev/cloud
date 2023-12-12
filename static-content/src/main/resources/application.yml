@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: static-content
+  config:
+    import: configserver:http://config-server:8888
+  cloud:
+    config:
+      fail-fast: true
+logging:
+  level:
+    com.netflix: DEBUG
+    org.springframework.web: DEBUG
+    com.optimagrowth: DEBUG

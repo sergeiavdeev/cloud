@@ -8,7 +8,7 @@ services:
       - 8888:8888
     environment:
       spring.profiles.active: "dev"
-      encrypt.key=9edc7779-04e8-4275-ae43-ebedb8555b99:
+      encrypt.key: 9edc7779-04e8-4275-ae43-ebedb8555b99
     healthcheck:
       test: curl --fail http://config-server:8888/gateway/defult || exit 1
       #interval: 2s
