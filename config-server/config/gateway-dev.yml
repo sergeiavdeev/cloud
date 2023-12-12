@@ -43,9 +43,12 @@ spring:
             - StripPrefix=1
             - PrefixPath=/
         - id: oauth2
-          uri: /oauth2/authorization/keycloak
+          uri: lb://gateway
           predicates:
-            - Path=/ttc-tops/oauth2/authorization/keycloak
+            - Path=/ttc-tops/**
+          filters:
+            - StripPrefix=1
+            - PrefixPath=/
       globalcors:
         cors-configurations:
           '[/**]':
