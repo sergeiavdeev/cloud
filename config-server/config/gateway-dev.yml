@@ -45,7 +45,7 @@ spring:
         - id: oauth2
           uri: lb://gateway
           predicates:
-            - Path=/ttc-tops/oauth2
+            - Path=/ttc-tops/oauth2/**
           filters:
             - StripPrefix=1
             - PrefixPath=/
