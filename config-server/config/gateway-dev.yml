@@ -43,12 +43,6 @@ spring:
             - StripPrefix=1
             - PrefixPath=/
         - id: oauth2
-          uri: lb://gateway
-          predicates:
-            - Path=/ttc-tops/oauth2/**, /ttc-tops/user/**
-          filters:
-            - StripPrefix=1
-            - PrefixPath=/
       globalcors:
         cors-configurations:
           '[/**]':
