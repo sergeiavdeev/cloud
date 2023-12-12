@@ -12,7 +12,6 @@ spring:
           keycloak:
             issuer-uri: https://avdeev-sa.ru/keycloak/realms/booking_realm
             user-name-attribute: preferred_username
-            authorization-uri: /ttc-tops/oauth2/authorization/keycloak
         registration:
           keycloak:
             provider: keycloak
