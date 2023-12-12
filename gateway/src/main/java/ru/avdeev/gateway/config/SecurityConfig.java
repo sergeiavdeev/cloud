@@ -1,5 +1,6 @@
 package ru.avdeev.gateway.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.context.annotation.Bean;
@@ -33,6 +34,8 @@ import java.util.stream.Collectors;
 @Configuration
 public class SecurityConfig {
 
+    @Value("${logout.url}")
+    private String logoutUrl;
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http, ServerLogoutSuccessHandler handler) {
         http.authorizeExchange((authorize) -> authorize
@@ -115,7 +118,7 @@ public class SecurityConfig {
         OidcClientInitiatedServerLogoutSuccessHandler handler =
                 new OidcClientInitiatedServerLogoutSuccessHandler(repository);
 
-        handler.setPostLogoutRedirectUri("{baseUrl}");
+        handler.setPostLogoutRedirectUri(logoutUrl);
         return handler;
     }
 }

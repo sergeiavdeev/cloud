@@ -58,3 +58,5 @@ logging:
   level:
     org.springframework.web.reactive: DEBUG
     org.springframework.security: DEBUG
+logout:
+  url: "{baseUrl}"
