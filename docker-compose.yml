@@ -33,7 +33,7 @@ services:
     ports:
       - 8083:8083
     environment:
-      spring.profiles.active: "dev"
+      spring.profiles.active: "tst"
     depends_on:
       config-server:
         condition: service_healthy

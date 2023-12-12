@@ -1,17 +1,57 @@
 server:
-  port: 8082
+  port: 8083
 spring:
+  webflux:
+    base-path: "/ttc-tops"
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: https://avdeev-sa.ru/keycloak/realms/booking_realm
+          jwk-set-uri: https://avdeev-sa.ru/keycloak/realms/booking_realm/protocol/openid-connect/certs
+      client:
+        provider:
+          keycloak:
+            issuer-uri: https://avdeev-sa.ru/keycloak/realms/booking_realm
+            user-name-attribute: preferred_username
+        registration:
+          keycloak:
+            provider: keycloak
+            client-id: booking
+            client-secret: '{cipher}878712b1da2988529855ad3d93671d350de72f4cff05a8a160ea684ac7f8f2b5ebe569546e613f742be00980a63c66cb5aea8ceffd6e869724c5a328de3a0d2f'
+            scope: openid
+            redirect-uri: 'https://avdeev-sa.ru/ttc-tops/login/oauth2/code/{registrationId}'
   cloud:
     gateway:
+      default-filters:
+        - TokenRelay=
+        - RemoveRequestHeader=Cookie
       discovery:
         locator:
           enabled: false
           lower-case-service-id: true
       routes:
-        - id: config-server
-          uri: lb://config-server
+        - id: resource-service
+          uri: lb://resource-service
           predicates:
-            - Path=/config/**
+            - Path=/api/v1/storage/**, /api/v1/contact-type/**
           filters:
             - StripPrefix=1
             - PrefixPath=/
+        - id: schedule-service
+          uri: lb://schedule-service
+          predicates:
+            - Path=/api/v1/work-time,/api/v1/calendar,/api/v1/reserve,/api/v1/calendar/**
+          filters:
+            - StripPrefix=1
+            - PrefixPath=/
+
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods:
+              - GET
+              - POST
+        add-to-simple-url-handler-mapping: true
