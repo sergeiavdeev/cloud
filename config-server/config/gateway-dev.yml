@@ -28,7 +28,6 @@ spring:
           enabled: false
           lower-case-service-id: true
       routes:
-
         - id: resource-service
           uri: lb://resource-service
           predicates:
@@ -43,6 +42,10 @@ spring:
           filters:
             - StripPrefix=1
             - PrefixPath=/
+        - id: oauth2
+          uri: /oauth2/authorization/keycloak
+          predicates:
+            -Path=/ttc-tops/oauth2/authorization/keycloak
       globalcors:
         cors-configurations:
           '[/**]':

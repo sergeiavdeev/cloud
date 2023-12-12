@@ -26,11 +26,4 @@ public class RouteConfig {
                 -> ok().contentType(MediaType.TEXT_HTML).syncBody(html)
         );
     }
-
-//    @Bean
-//    public RouterFunction<ServerResponse> htmlRouter2(@Value("classpath:/static/ttc-tops/index.html") Resource html) {
-//        return route(GET("/ttc-tops"), request
-//                -> ok().contentType(MediaType.TEXT_HTML).syncBody(html)
-//        );
-//    }
 }
