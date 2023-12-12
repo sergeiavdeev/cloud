@@ -35,7 +35,7 @@ spring:
           predicates:
             - Path=/api/v1/storage/**, /api/v1/contact-type/**
           filters:
-            - StripPrefix=1
+            - StripPrefix=2
             - PrefixPath=/
         - id: schedule-service
           uri: lb://schedule-service
