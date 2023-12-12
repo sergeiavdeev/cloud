@@ -47,7 +47,7 @@ spring:
           predicates:
             - Path=/ttc-tops/**
           filters:
-            - StripPrefix=1
+            - StripPrefix=0
             - PrefixPath=/
       globalcors:
         cors-configurations:
