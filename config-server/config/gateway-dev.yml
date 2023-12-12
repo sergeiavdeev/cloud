@@ -42,7 +42,7 @@ spring:
           filters:
             - StripPrefix=1
             - PrefixPath=/
-        - id: oauth2
+
       globalcors:
         cors-configurations:
           '[/**]':
