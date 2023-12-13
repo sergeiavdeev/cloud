@@ -43,7 +43,13 @@ spring:
           filters:
             - StripPrefix=1
             - PrefixPath=/
-
+        - id: static-service
+          uri: lb://static-content
+          predicates:
+            - Path=/ttc-tops/**
+          filters:
+            - StripPrefix=0
+            - PrefixPath=/
       globalcors:
         cors-configurations:
           '[/**]':
