@@ -65,4 +65,4 @@ logging:
 logout:
   url: "{baseUrl}/ttc-tops/"
 login:
-  post_url: "{baseUrl}/ttc-tops/"
+  post_url: "/ttc-tops/"
