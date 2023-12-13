@@ -18,7 +18,7 @@ spring:
             client-id: booking
             client-secret: '{cipher}878712b1da2988529855ad3d93671d350de72f4cff05a8a160ea684ac7f8f2b5ebe569546e613f742be00980a63c66cb5aea8ceffd6e869724c5a328de3a0d2f'
             scope: openid
-            redirect-uri: 'https://avdeev-sa.ru/ttc-tops/login/oauth2/code/{registrationId}'
+            redirect-uri: 'https://avdeev-sa.ru/login/oauth2/code/{registrationId}'
   cloud:
     gateway:
       default-filters:
