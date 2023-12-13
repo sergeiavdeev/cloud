@@ -7,7 +7,7 @@ services:
     ports:
       - 8888:8888
     environment:
-      spring.profiles.active: "dev"
+      spring.profiles.active: ${PROFILE}
       encrypt.key: 9edc7779-04e8-4275-ae43-ebedb8555b99
     healthcheck:
       test: curl --fail http://config-server:8888/gateway/defult || exit 1
@@ -22,7 +22,7 @@ services:
     ports:
       - 8761:8761
     environment:
-      spring.profiles.active: "dev"
+      spring.profiles.active: ${PROFILE}
     depends_on:
      - config-server
 
@@ -33,7 +33,7 @@ services:
     ports:
       - 8083:8083
     environment:
-      spring.profiles.active: "dev"
+      spring.profiles.active: ${PROFILE}
     depends_on:
       config-server:
         condition: service_healthy
@@ -44,7 +44,7 @@ services:
     image: static-content:${TAG}
     command: java -jar static-content-1.0-SNAPSHOT.jar
     environment:
-      spring.profiles.active: "dev"
+      spring.profiles.active: ${PROFILE}
     depends_on:
       config-server:
         condition: service_healthy
