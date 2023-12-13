@@ -33,7 +33,7 @@ services:
     ports:
       - 8083:8083
     environment:
-      spring.profiles.active: "tst"
+      spring.profiles.active: "dev"
     depends_on:
       config-server:
         condition: service_healthy
@@ -44,7 +44,7 @@ services:
     image: static-content:${TAG}
     command: java -jar static-content-1.0-SNAPSHOT.jar
     environment:
-      spring.profiles.active: "tst"
+      spring.profiles.active: "dev"
     depends_on:
       config-server:
         condition: service_healthy
