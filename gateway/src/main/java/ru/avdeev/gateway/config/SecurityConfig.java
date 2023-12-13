@@ -22,10 +22,13 @@ import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.security.web.server.authentication.RedirectServerAuthenticationSuccessHandler;
+import org.springframework.security.web.server.authentication.ServerAuthenticationSuccessHandler;
 import org.springframework.security.web.server.authentication.logout.ServerLogoutSuccessHandler;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.net.URI;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -36,8 +39,13 @@ public class SecurityConfig {
 
     @Value("${logout.url}")
     private String logoutUrl;
+
+    @Value("${login.post_url}")
+    private String loginSuccessUrl;
     @Bean
-    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http, ServerLogoutSuccessHandler handler) {
+    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http,
+                                                         ServerLogoutSuccessHandler logoutSuccessHandler,
+                                                         ServerAuthenticationSuccessHandler loginSuccessHandler) {
         http.authorizeExchange((authorize) -> authorize
                         .pathMatchers(HttpMethod.POST, "/**").authenticated()
                         .anyExchange().permitAll()
@@ -49,8 +57,9 @@ public class SecurityConfig {
                         )
                 )
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
-                .oauth2Login(Customizer.withDefaults())
-                .logout(logoutSpec -> logoutSpec.logoutSuccessHandler(handler))
+                .oauth2Login(oAuth2LoginSpec -> oAuth2LoginSpec
+                        .authenticationSuccessHandler(loginSuccessHandler))
+                .logout(logoutSpec -> logoutSpec.logoutSuccessHandler(logoutSuccessHandler))
                 .oauth2Client(Customizer.withDefaults())
             ;
 
@@ -119,6 +128,14 @@ public class SecurityConfig {
                 new OidcClientInitiatedServerLogoutSuccessHandler(repository);
 
         handler.setPostLogoutRedirectUri(logoutUrl);
+        return handler;
+    }
+
+    @Bean
+    ServerAuthenticationSuccessHandler authenticationSuccessHandler() {
+
+        RedirectServerAuthenticationSuccessHandler handler = new RedirectServerAuthenticationSuccessHandler();
+        handler.setLocation(URI.create(loginSuccessUrl));
         return handler;
     }
 }

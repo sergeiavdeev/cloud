@@ -55,3 +55,5 @@ spring:
         add-to-simple-url-handler-mapping: true
 logout:
   url: "https://avdeev-sa.ru/ttc-tops/"
+login:
+  post_url: "https://avdeev-sa.ru/ttc-tops/"

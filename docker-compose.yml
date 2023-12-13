@@ -39,3 +39,14 @@ services:
         condition: service_healthy
       eureka:
         condition: service_started
+  static-content:
+    build: static-content/
+    image: static-content:${TAG}
+    command: java -jar static-content-1.0-SNAPSHOT.jar
+    environment:
+      spring.profiles.active: "tst"
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka:
+        condition: service_started
