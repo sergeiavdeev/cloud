@@ -58,6 +58,12 @@ spring:
               - GET
               - POST
         add-to-simple-url-handler-mapping: true
+management:
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include: "health,info,gateway"
 logging:
   level:
     org.springframework.web.reactive: DEBUG
