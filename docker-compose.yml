@@ -10,11 +10,13 @@ services:
       spring.profiles.active: ${PROFILE}
       encrypt.key: 9edc7779-04e8-4275-ae43-ebedb8555b99
     healthcheck:
-      test: curl --fail http://config-server:8888/gateway/defult || exit 1
+      test: curl --fail http://config-server:8888/actuator/health || exit 1
       #interval: 2s
       #retries: 5
       #start_period: 1s
       #timeout: 5s
+    networks:
+      - default
   eureka:
     build: eureka/
     image: eureka:${TAG}
@@ -25,6 +27,8 @@ services:
       spring.profiles.active: ${PROFILE}
     depends_on:
      - config-server
+    networks:
+      - default
 
   gateway:
     build: gateway/
@@ -39,6 +43,9 @@ services:
         condition: service_healthy
       eureka:
         condition: service_started
+    networks:
+      - default
+
   static-content:
     build: static-content/
     image: static-content:${TAG}
@@ -50,3 +57,8 @@ services:
         condition: service_healthy
       eureka:
         condition: service_started
+    networks:
+      - default
+networks:
+  default:
+    driver: bridge
