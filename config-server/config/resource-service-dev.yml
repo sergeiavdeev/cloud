@@ -2,7 +2,7 @@ server:
   port: 0
 spring:
   r2dbc:
-    url: r2dbc:postgresql://localhost:5432/booking
+    url: r2dbc:postgresql://192.168.0.87:5432/booking
     name: postgresql
     username: resource
     password: '{cipher}eb56138ad5beb09bef691268bd396082251b65a51e1bc81b90d2da3532fd7aea'
