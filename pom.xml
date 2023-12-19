@@ -19,7 +19,6 @@
         <module>eureka</module>
         <module>config-server</module>
         <module>gateway</module>
-        <module>static-content</module>
     </modules>
 
     <properties>

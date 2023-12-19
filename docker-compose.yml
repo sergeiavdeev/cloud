@@ -1,4 +1,14 @@
 version: "3.9"
+networks:
+  ttc-tops:
+    external: false
+    name: ttc-tops
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.23.0.0/16"
+          gateway: "172.23.0.1"
 services:
   config-server:
     build: config-server/
@@ -16,7 +26,7 @@ services:
       #start_period: 1s
       #timeout: 5s
     networks:
-      - default
+      - ttc-tops
   eureka:
     build: eureka/
     image: eureka:${TAG}
@@ -28,7 +38,7 @@ services:
     depends_on:
      - config-server
     networks:
-      - default
+      - ttc-tops
 
   gateway:
     build: gateway/
@@ -44,23 +54,4 @@ services:
       eureka:
         condition: service_started
     networks:
-      - default
-
-  static-content:
-    build: static-content/
-    image: static-content:${TAG}
-    command: java -jar static-content-1.0-SNAPSHOT.jar
-    environment:
-      spring.profiles.active: ${PROFILE}
-    depends_on:
-      config-server:
-        condition: service_healthy
-      eureka:
-        condition: service_started
-    networks:
-      - default
-networks:
-  default:
-    external: true
-    name: ttc-tops
-    driver: bridge
+      - ttc-tops
