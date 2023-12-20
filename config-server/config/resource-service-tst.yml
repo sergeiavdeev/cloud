@@ -1,0 +1,58 @@
+server:
+  port: 0
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://10.8.0.2:5432/booking
+    name: postgresql
+    username: resource
+    password: '{cipher}eb56138ad5beb09bef691268bd396082251b65a51e1bc81b90d2da3532fd7aea'
+    schema: "resource"
+    repositories:
+      enabled: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://avdeev-sa.ru/keycloak/realms/booking_realm
+          jwk-set-uri: https://avdeev-sa.ru/keycloak/realms/booking_realm/protocol/openid-connect/certs
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    url: jdbc:postgresql://10.8.0.2:5432/booking
+    user: resource
+    password: '{cipher}eb56138ad5beb09bef691268bd396082251b65a51e1bc81b90d2da3532fd7aea'
+management:
+  endpoints:
+    enabled-by-default: false
+    web:
+      exposure:
+        include: "health,info"
+  endpoint:
+    info:
+      enabled: true
+    health:
+      enabled: true
+      show-details: "always"
+  info:
+    java:
+      enabled: true
+  health:
+    circuitbreakers:
+      enabled: true
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      minimumNumberOfCalls: 5
+      permittedNumberOfCallsInHalfOpenState: 3
+      automaticTransitionFromOpenToHalfOpenEnabled: true
+      waitDurationInOpenState: 5s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+
+logging:
+  level:
+    io.r2dbc.postgresql.QUERY: DEBUG
+    io.r2dbc.postgresql.PARAM: DEBUG
+    org.springframework.web.reactive: DEBUG
