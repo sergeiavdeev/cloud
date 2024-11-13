@@ -5,17 +5,17 @@ spring:
     oauth2:
       resource-server:
         jwt:
-          issuer-uri: https://avdeev-sa.ru/keycloak/realms/booking_realm
-          jwk-set-uri: https://avdeev-sa.ru/keycloak/realms/booking_realm/protocol/openid-connect/certs
+          issuer-uri: https://avdeev-sa.ru/keycloak/realms/ttc-tops
+          jwk-set-uri: https://avdeev-sa.ru/keycloak/realms/ttc-tops/protocol/openid-connect/certs
       client:
         provider:
           keycloak:
-            issuer-uri: https://avdeev-sa.ru/keycloak/realms/booking_realm
+            issuer-uri: https://avdeev-sa.ru/keycloak/realms/ttc-tops
             user-name-attribute: preferred_username
         registration:
           keycloak:
             provider: keycloak
-            client-id: booking
+            client-id: ttc-tops
             client-secret: '{cipher}878712b1da2988529855ad3d93671d350de72f4cff05a8a160ea684ac7f8f2b5ebe569546e613f742be00980a63c66cb5aea8ceffd6e869724c5a328de3a0d2f'
             scope: openid
   cloud:
