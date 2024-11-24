@@ -13,6 +13,7 @@ services:
   config-server:
     #build: config-server/
     image: sergeiavdeev/config-server
+    container_name: config-server
     #command: java -jar config-server-1.0-SNAPSHOT.jar
     ports:
       - "8888:8888"
@@ -31,6 +32,7 @@ services:
   eureka:
     #build: eureka/
     image: sergeiavdeev/eureka
+    container_name: eureka
     #command: java -jar eureka-1.0-SNAPSHOT.jar
     ports:
       - "8761:8761"
@@ -45,6 +47,7 @@ services:
   gateway:
     #build: gateway/
     image: sergeiavdeev/gateway
+    container_name: gateway
     #command: java -jar gateway-1.0-SNAPSHOT.jar
     ports:
       - "8083:8083"
