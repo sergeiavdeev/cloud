@@ -11,9 +11,9 @@ networks:
           gateway: "172.23.0.1"
 services:
   config-server:
-    build: config-server/
-    image: config-server:${TAG}
-    command: java -jar config-server-1.0-SNAPSHOT.jar
+    #build: config-server/
+    image: sergeiavdeev/config-server
+    #command: java -jar config-server-1.0-SNAPSHOT.jar
     ports:
       - "8888:8888"
     environment:
@@ -30,7 +30,7 @@ services:
   eureka:
     build: eureka/
     image: eureka:${TAG}
-    command: java -jar eureka-1.0-SNAPSHOT.jar
+    #command: java -jar eureka-1.0-SNAPSHOT.jar
     ports:
       - "8761:8761"
     environment:
@@ -41,9 +41,9 @@ services:
       - ttc-tops
 
   gateway:
-    build: gateway/
-    image: gateway:${TAG}
-    command: java -jar gateway-1.0-SNAPSHOT.jar
+    #build: gateway/
+    image: sergeiavdeev/gateway
+    #command: java -jar gateway-1.0-SNAPSHOT.jar
     ports:
       - "8083:8083"
     environment:
