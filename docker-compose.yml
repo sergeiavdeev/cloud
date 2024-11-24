@@ -28,8 +28,8 @@ services:
     networks:
       - ttc-tops
   eureka:
-    build: eureka/
-    image: eureka:${TAG}
+    #build: eureka/
+    image: sergeiavdeev/eureka
     #command: java -jar eureka-1.0-SNAPSHOT.jar
     ports:
       - "8761:8761"
