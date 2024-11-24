@@ -16,6 +16,7 @@ services:
     #command: java -jar config-server-1.0-SNAPSHOT.jar
     ports:
       - "8888:8888"
+    restart: always
     environment:
       spring.profiles.active: ${PROFILE}
       encrypt.key: ${ENCRYPT_KEY}
@@ -33,6 +34,7 @@ services:
     #command: java -jar eureka-1.0-SNAPSHOT.jar
     ports:
       - "8761:8761"
+    restart: always
     environment:
       spring.profiles.active: ${PROFILE}
     depends_on:
@@ -46,6 +48,7 @@ services:
     #command: java -jar gateway-1.0-SNAPSHOT.jar
     ports:
       - "8083:8083"
+    restart: always
     environment:
       spring.profiles.active: ${PROFILE}
     depends_on:
