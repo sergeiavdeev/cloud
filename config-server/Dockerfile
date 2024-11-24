@@ -1,4 +1,4 @@
-FROM openjdk:21
+FROM docker.io/openjdk:21
 
 WORKDIR /app
 
