@@ -64,6 +64,7 @@ spring:
             allowedMethods:
               - GET
               - POST
+              - PUT
         add-to-simple-url-handler-mapping: true
 management:
   endpoints:
