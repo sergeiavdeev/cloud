@@ -54,7 +54,7 @@ spring:
           predicates:
             - Path=/bot/**
           filters:
-            - StripPrefix=0
+            - StripPrefix=1
             - PrefixPath=/
       globalcors:
         cors-configurations:
