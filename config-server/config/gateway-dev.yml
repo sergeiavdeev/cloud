@@ -53,6 +53,9 @@ spring:
           uri: lb://rempmm-bot
           predicates:
             - Path=/bot/**
+          filters:
+            - StripPrefix=0
+            - PrefixPath=/
       globalcors:
         cors-configurations:
           '[/**]':
