@@ -12,6 +12,7 @@ spring:
           #password:
           search-paths:
             - /config
+            - /
           clone-on-start: true
   application:
     name: config-server
