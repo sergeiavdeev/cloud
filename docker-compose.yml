@@ -1,0 +1,62 @@
+networks:
+  ttc-tops:
+    external: false
+    name: ttc-tops
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.23.0.0/16"
+          gateway: "172.23.0.1"
+services:
+  config-server:
+    #build: config-server/
+    image: sergeiavdeev/config-server
+    container_name: config-server
+    #command: java -jar config-server-1.0-SNAPSHOT.jar
+    ports:
+      - "8888:8888"
+    restart: always
+    environment:
+      spring.profiles.active: ${PROFILE}
+      encrypt.key: ${ENCRYPT_KEY}
+    healthcheck:
+      test: curl --fail http://config-server:8888/actuator/health || exit 1
+      #interval: 2s
+      #retries: 5
+      #start_period: 1s
+      #timeout: 5s
+    networks:
+      - ttc-tops
+  eureka:
+    #build: eureka/
+    image: sergeiavdeev/eureka
+    container_name: eureka
+    #command: java -jar eureka-1.0-SNAPSHOT.jar
+    ports:
+      - "8761:8761"
+    restart: always
+    environment:
+      spring.profiles.active: ${PROFILE}
+    depends_on:
+     - config-server
+    networks:
+      - ttc-tops
+
+  gateway:
+    #build: gateway/
+    image: sergeiavdeev/gateway
+    container_name: gateway
+    #command: java -jar gateway-1.0-SNAPSHOT.jar
+    ports:
+      - "8083:8083"
+    restart: always
+    environment:
+      spring.profiles.active: ${PROFILE}
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka:
+        condition: service_started
+    networks:
+      - ttc-tops
