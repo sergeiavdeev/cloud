@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.ReactiveSecurityContextHolder;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/user")
 public class UserInfoController {
 
@@ -40,8 +42,6 @@ public class UserInfoController {
                                         .collect(Collectors.toList()))
                                 .build();
                     })
-                .switchIfEmpty(Mono.just(UserDto.builder().build()))
-                ;
-
+                .switchIfEmpty(Mono.just(UserDto.builder().build()));
     }
 }
