@@ -17,7 +17,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(value = {"*"}, allowedHeaders = {"*"}, origins = {"*"})
 @RequestMapping("/user")
 public class UserInfoController {
 
