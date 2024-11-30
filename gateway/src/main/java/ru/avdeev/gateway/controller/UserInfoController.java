@@ -25,6 +25,7 @@ public class UserInfoController {
     public Mono<UserDto> getUserInfo(ServerHttpResponse response) {
 
         response.setStatusCode(HttpStatusCode.valueOf(401));
+        response.getHeaders().add("Access-Control-Allow-Credentials", "true");
 
         return ReactiveSecurityContextHolder.getContext()
                     .map(SecurityContext::getAuthentication)
@@ -32,7 +33,6 @@ public class UserInfoController {
                         DefaultOidcUser user = (DefaultOidcUser) authentication.getPrincipal();
 
                         response.setStatusCode(HttpStatusCode.valueOf(200));
-                        response.getHeaders().add("Access-Control-Allow-Credentials", "true");
                         return UserDto.builder()
                                 .uuid(UUID.fromString(user.getName()))
                                 .firstName(user.getGivenName())
