@@ -17,7 +17,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin(value = {"*"}, allowedHeaders = {"*"}, origins = {"http://localhost:5173"})
+@CrossOrigin(value = {"http://localhost:5173"}, allowedHeaders = {"*"}, origins = {"http://localhost:5173"})
 @RequestMapping("/user")
 public class UserInfoController {
 
