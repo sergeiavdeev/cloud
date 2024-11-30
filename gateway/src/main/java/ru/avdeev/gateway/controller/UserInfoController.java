@@ -32,6 +32,7 @@ public class UserInfoController {
                         DefaultOidcUser user = (DefaultOidcUser) authentication.getPrincipal();
 
                         response.setStatusCode(HttpStatusCode.valueOf(200));
+                        response.getHeaders().add("Access-Control-Allow-Credentials", "true");
                         return UserDto.builder()
                                 .uuid(UUID.fromString(user.getName()))
                                 .firstName(user.getGivenName())
