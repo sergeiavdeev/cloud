@@ -1,3 +1,4 @@
+# Local starter
 docker ps -aq --filter "name=config-server" | xargs -r docker rm -f
 docker ps -aq --filter "name=gateway" | xargs -r docker rm -f
 docker ps -aq --filter "name=eureka" | xargs -r docker rm -f
