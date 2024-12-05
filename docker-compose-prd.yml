@@ -10,7 +10,7 @@ networks:
           gateway: "172.23.0.1"
 services:
   gateway:
-    image: sergeiavdeev/gateway
+    image: sergeiavdeev/gateway:${BUILD_NUMBER}-prd
     container_name: gateway-prd
     ports:
       - "8084:8083"
