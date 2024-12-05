@@ -1,0 +1,21 @@
+networks:
+  ttc-tops:
+    external: false
+    name: ttc-tops
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.23.0.0/16"
+          gateway: "172.23.0.1"
+services:
+  gateway:
+    image: sergeiavdeev/gateway
+    container_name: gateway-prd
+    ports:
+      - "8084:8083"
+    restart: always
+    environment:
+      spring.profiles.active: ${PROFILE}
+    networks:
+      - ttc-tops
