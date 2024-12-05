@@ -6,4 +6,5 @@ docker pull sergeiavdeev/eureka:latest
 docker pull sergeiavdeev/gateway:latest
 docker pull sergeiavdeev/config-server:latest
 PROFILE=dev ENCRYPT_KEY=9edc7779-04e8-4275-ae43-ebedb8555b99 docker compose up -d
+PROFILE=prd BUILD_NUMBER=8 ENCRYPT_KEY=9edc7779-04e8-4275-ae43-ebedb8555b99 docker compose -f docker-compose-prd.yml up -d
 docker system prune -a -f
