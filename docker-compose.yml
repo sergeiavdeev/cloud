@@ -11,7 +11,7 @@ networks:
 services:
   config-server:
     #build: config-server/
-    image: sergeiavdeev/config-server
+    image: sergeiavdeev/config-server:${TAG}
     container_name: config-server
     #command: java -jar config-server-1.0-SNAPSHOT.jar
     ports:
@@ -30,7 +30,7 @@ services:
       - ttc-tops
   eureka:
     #build: eureka/
-    image: sergeiavdeev/eureka
+    image: sergeiavdeev/eureka:${TAG}
     container_name: eureka
     #command: java -jar eureka-1.0-SNAPSHOT.jar
     ports:
@@ -45,7 +45,7 @@ services:
 
   gateway:
     #build: gateway/
-    image: sergeiavdeev/gateway
+    image: sergeiavdeev/gateway:${TAG}
     container_name: gateway
     #command: java -jar gateway-1.0-SNAPSHOT.jar
     ports:

@@ -12,12 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 import ru.avdeev.gateway.dto.UserDto;
-
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin(value = {"http://localhost:5173"}, allowedHeaders = {"*"}, origins = {"http://localhost:5173"})
+@CrossOrigin(value = {"http://localhost:5173"}, allowedHeaders = {"*"}, allowCredentials = "true")
 @RequestMapping("/user")
 public class UserInfoController {
 
@@ -25,7 +24,6 @@ public class UserInfoController {
     public Mono<UserDto> getUserInfo(ServerHttpResponse response) {
 
         response.setStatusCode(HttpStatusCode.valueOf(401));
-        response.getHeaders().add("Access-Control-Allow-Credentials", "true");
 
         return ReactiveSecurityContextHolder.getContext()
                     .map(SecurityContext::getAuthentication)
