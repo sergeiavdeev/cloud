@@ -35,6 +35,7 @@ public class UserInfoController {
                                 .uuid(UUID.fromString(user.getName()))
                                 .firstName(user.getGivenName())
                                 .lastName(user.getFamilyName())
+                                .email(user.getEmail())
                                 .roles(authentication.getAuthorities().stream()
                                         .map(GrantedAuthority::getAuthority)
                                         .map(s -> s.replace("ROLE_", ""))
