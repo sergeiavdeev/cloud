@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -54,6 +55,13 @@ public class SecurityConfig {
                         .authenticationSuccessHandler(loginSuccessHandler))
                 .logout(logoutSpec -> logoutSpec.logoutSuccessHandler(logoutSuccessHandler))
                 .oauth2Client(Customizer.withDefaults())
+                .addFilterAfter((exchange, chain) -> {
+                    exchange.getResponse().getHeaders().add("Access-Control-Allow-Origin", "http://localhost:5173");
+                    exchange.getResponse().getHeaders().add("Access-Control-Allow-Credentials", "true");
+                    exchange.getResponse().getHeaders().add("Access-Control-Allow-Headers", "*,x-requested-with,content-type");
+                    exchange.getResponse().getHeaders().add("Access-Control-Allow-Methods", "GET,POST,PUT,OPTIONS");
+                    return chain.filter(exchange);
+                }, SecurityWebFiltersOrder.FIRST)
             ;
 
         return http.build();
