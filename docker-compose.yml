@@ -28,6 +28,12 @@ services:
       #timeout: 5s
     networks:
       - ttc-tops
+    deploy:
+      resources:
+        limits:
+          memory: '512M'
+        reservations:
+          memory: '256M'
   eureka:
     #build: eureka/
     image: sergeiavdeev/eureka:${TAG}
@@ -42,7 +48,12 @@ services:
      - config-server
     networks:
       - ttc-tops
-
+    deploy:
+      resources:
+        limits:
+          memory: '512M'
+        reservations:
+          memory: '256M'
   gateway:
     #build: gateway/
     image: sergeiavdeev/gateway:${TAG}
@@ -60,3 +71,9 @@ services:
         condition: service_started
     networks:
       - ttc-tops
+    deploy:
+      resources:
+        limits:
+          memory: '512M'
+        reservations:
+          memory: '256M'
