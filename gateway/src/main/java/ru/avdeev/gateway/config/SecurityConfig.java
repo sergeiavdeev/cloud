@@ -42,6 +42,7 @@ public class SecurityConfig {
 
         http.authorizeExchange((authorize) -> authorize
                         .pathMatchers(HttpMethod.POST, "/**").authenticated()
+                        .pathMatchers(HttpMethod.DELETE, "/**").authenticated()
                         .anyExchange().permitAll()
                 )
                 .oauth2ResourceServer((resourceServer) -> resourceServer
@@ -59,7 +60,7 @@ public class SecurityConfig {
                     exchange.getResponse().getHeaders().add("Access-Control-Allow-Origin", "http://localhost:5173");
                     exchange.getResponse().getHeaders().add("Access-Control-Allow-Credentials", "true");
                     exchange.getResponse().getHeaders().add("Access-Control-Allow-Headers", "*,x-requested-with,content-type");
-                    exchange.getResponse().getHeaders().add("Access-Control-Allow-Methods", "GET,POST,PUT,OPTIONS");
+                    exchange.getResponse().getHeaders().add("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
                     return chain.filter(exchange);
                 }, SecurityWebFiltersOrder.FIRST)
             ;
