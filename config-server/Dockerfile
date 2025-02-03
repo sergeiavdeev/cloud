@@ -1,4 +1,6 @@
-FROM openjdk:21
+FROM alpine/java:21-jdk
+
+RUN apk --no-cache add curl
 
 WORKDIR /app
 

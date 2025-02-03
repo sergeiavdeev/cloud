@@ -12,13 +12,6 @@ spring:
           #password:
           search-paths:
             - /config
-            - /
           clone-on-start: true
   application:
     name: config-server
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://eureka:8761/eureka/
-  instance:
-    instance-id: ${spring.application.name}:${random.value}

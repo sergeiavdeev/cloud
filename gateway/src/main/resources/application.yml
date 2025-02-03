@@ -6,8 +6,4 @@ spring:
   cloud:
     config:
       fail-fast: true
-logging:
-  level:
-    com.netflix: DEBUG
-    org.springframework.web: DEBUG
-    com.optimagrowth: DEBUG
+
