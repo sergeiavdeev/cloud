@@ -3,6 +3,7 @@ package ru.avdeev.gateway.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
@@ -24,6 +25,7 @@ import org.springframework.security.web.server.authentication.logout.ServerLogou
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
+import java.util.Arrays;
 import java.util.List;
 
 @Configuration
@@ -38,7 +40,8 @@ public class SecurityConfig {
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http,
                                                          ServerLogoutSuccessHandler logoutSuccessHandler,
-                                                         ServerAuthenticationSuccessHandler loginSuccessHandler) {
+                                                         ServerAuthenticationSuccessHandler loginSuccessHandler,
+                                                         Environment env) {
 
         http.authorizeExchange((authorize) -> authorize
                         .pathMatchers(HttpMethod.POST, "/**").authenticated()
@@ -57,10 +60,12 @@ public class SecurityConfig {
                 .logout(logoutSpec -> logoutSpec.logoutSuccessHandler(logoutSuccessHandler))
                 .oauth2Client(Customizer.withDefaults())
                 .addFilterAfter((exchange, chain) -> {
-                    exchange.getResponse().getHeaders().add("Access-Control-Allow-Origin", "http://localhost:5173");
-                    exchange.getResponse().getHeaders().add("Access-Control-Allow-Credentials", "true");
-                    exchange.getResponse().getHeaders().add("Access-Control-Allow-Headers", "*,x-requested-with,content-type");
-                    exchange.getResponse().getHeaders().add("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+                    if (Arrays.asList(env.getActiveProfiles()).contains("dev")) {
+                        exchange.getResponse().getHeaders().add("Access-Control-Allow-Origin", "http://localhost:5173");
+                        exchange.getResponse().getHeaders().add("Access-Control-Allow-Credentials", "true");
+                        exchange.getResponse().getHeaders().add("Access-Control-Allow-Headers", "*,x-requested-with,content-type");
+                        exchange.getResponse().getHeaders().add("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+                    }
                     return chain.filter(exchange);
                 }, SecurityWebFiltersOrder.FIRST)
             ;
