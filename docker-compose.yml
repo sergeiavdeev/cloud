@@ -45,7 +45,8 @@ services:
     environment:
       spring.profiles.active: ${PROFILE}
     depends_on:
-     - config-server
+      config-server:
+        condition: service_started
     networks:
       - ttc-tops
     deploy:

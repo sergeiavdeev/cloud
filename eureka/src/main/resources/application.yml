@@ -1,11 +1,8 @@
 spring:
   application:
     name: eureka-server
-server:
-  port: 8761
-eureka:
-  client:
-    register-with-eureka: false
-    fetch-registry: false
-  server:
-    renewal-percent-threshold: 0.85
+  config:
+    import: configserver:http://config-server:8888
+  cloud:
+    config:
+      fail-fast: true

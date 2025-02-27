@@ -8,9 +8,18 @@ mvn clean package
 # docker pull sergeiavdeev/eureka:latest
 # docker pull sergeiavdeev/gateway:latest
 # docker pull sergeiavdeev/config-server:latest
+cp /opt/crt/www_avdeev-sa_ru.crt gateway/www_avdeev-sa_ru.crt
+cp /opt/crt/www_avdeev-sa_ru.crt eureka/www_avdeev-sa_ru.crt
+
+
 docker build -t sergeiavdeev/eureka:1-dev eureka/
 docker build -t sergeiavdeev/config-server:1-dev config-server/
 docker build -t sergeiavdeev/gateway:1-dev gateway/
+
+rm -f gateway/www_avdeev-sa_ru.crt
+rm -f eureka/www_avdeev-sa_ru.crt
+
+
 PROFILE=dev TAG=1-dev ENCRYPT_KEY=9edc7779-04e8-4275-ae43-ebedb8555b99 docker compose up -d
 PROFILE=prd docker compose -f docker-compose-prd.yml up -d
 docker system prune -a -f
