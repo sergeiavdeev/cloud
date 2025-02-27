@@ -20,6 +20,7 @@ services:
     environment:
       spring.profiles.active: ${PROFILE}
       encrypt.key: ${ENCRYPT_KEY}
+      LOKI: ${LOKI}
     #healthcheck:
       #test: curl --fail http://config-server:8888/actuator/health || exit 1
       #interval: 2s
@@ -44,6 +45,7 @@ services:
     restart: always
     environment:
       spring.profiles.active: ${PROFILE}
+      LOKI: ${LOKI}
     depends_on:
       config-server:
         condition: service_started
@@ -65,6 +67,7 @@ services:
     restart: always
     environment:
       spring.profiles.active: ${PROFILE}
+      LOKI: ${LOKI}
     depends_on:
       config-server:
         condition: service_started

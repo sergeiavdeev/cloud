@@ -17,6 +17,7 @@ services:
     restart: always
     environment:
       spring.profiles.active: ${PROFILE}
+      LOKI: ${LOKI}
     networks:
       - ttc-tops
     deploy:
